@@ -210,7 +210,9 @@ jobs:
           # Format penulisan satu ip dan satu domain/subdomain dalam satu baris.
           # [IP][Spasi][Domain/Subdomain/IP]
 
-          # Mulai hosts bebasid" | cat - hosts > temp && mv temp hosts
+          # Mulai hosts bebasid
+
+          " | cat - hosts > temp && mv temp hosts
           echo "${{ steps.read-hosts.outputs.content }}" > hosts
         shell: bash
       - name: Commit and push changes
