@@ -147,51 +147,51 @@
 
 # Mulai hosts bebasid
 
-
 # [hltv.org]
 172.64.146.44 atmosphere-secure.hltv.org
 172.64.146.44 fantasy-secure.hltv.org
 172.64.146.44 pronunciation.hltv.org
 13.49.106.76 staging.bcwp.hltv.org
 172.64.146.44 scorebot-lb.hltv.org
-172.64.146.44 r2-demos.hltv.org
-172.64.146.44 scripts.hltv.org
-172.64.146.44 img-cdn.hltv.org
-104.18.41.212 static.hltv.org
+104.18.41.212 r2-demos.hltv.org
+104.18.41.212 img-cdn.hltv.org
+104.18.41.212 scripts.hltv.org
+172.64.146.44 static.hltv.org
 88.99.167.213 demos.hltv.org
 104.18.41.212 ncuxt.hltv.org
-23.227.38.32 shop.hltv.org
-172.64.146.44 geo2.hltv.org
 13.49.106.76 bcwp.hltv.org
+23.227.38.32 shop.hltv.org
+104.18.41.212 geo2.hltv.org
 188.40.59.77 dev2.hltv.org
-78.46.34.93 bnc.hltv.org
-172.64.146.44 www.hltv.org
-104.18.41.212 app.hltv.org
+172.64.146.44 app.hltv.org
 172.64.146.44 out.hltv.org
+78.46.34.93 bnc.hltv.org
+104.18.41.212 www.hltv.org
 104.18.41.212 hltv.org
 
 # [mangadex.org]
-45.129.229.2 uploads.mangadex.org
-18.154.227.107 status.mangadex.org
-45.129.229.1 forums.mangadex.org
+45.129.229.1 uploads.mangadex.org
+13.226.210.95 status.mangadex.org
+45.129.229.2 forums.mangadex.org
 45.129.229.1 dxlb.mangadex.org
 45.129.229.2 auth.mangadex.org
-45.129.229.1 www.mangadex.org
-45.129.229.1 api.mangadex.org
-45.129.229.14 ns2.mangadex.org
 45.129.229.13 ns1.mangadex.org
+45.129.229.2 api.mangadex.org
+45.129.229.14 ns2.mangadex.org
+45.129.229.1 www.mangadex.org
 45.129.229.2 mangadex.org
 
 # [rlsbb.ru]
-104.21.43.240 archive.rlsbb.ru
-172.67.189.6 comment.rlsbb.ru
+172.67.189.6 archive.rlsbb.ru
+104.21.43.240 comment.rlsbb.ru
 172.67.189.6 search.rlsbb.ru
-172.67.189.6 panel.rlsbb.ru
-104.21.43.240 old4.rlsbb.ru
+104.21.43.240 panel.rlsbb.ru
 104.21.43.240 nfo1.rlsbb.ru
-172.67.189.6 old2.rlsbb.ru
-104.21.43.240 old3.rlsbb.ru
-104.21.43.240 www.rlsbb.ru
-172.67.189.6 log.rlsbb.ru
-104.21.43.240 img.rlsbb.ru
+104.21.43.240 old4.rlsbb.ru
+104.21.43.240 old2.rlsbb.ru
+172.67.189.6 old3.rlsbb.ru
+172.67.189.6 img.rlsbb.ru
 172.67.189.6 old.rlsbb.ru
+172.67.189.6 www.rlsbb.ru
+104.21.43.240 log.rlsbb.ru
+104.21.43.240 rlsbb.ru
