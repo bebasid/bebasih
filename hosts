@@ -1,1 +1,66 @@
 
+
+# [bebasid.com]
+103.87.68.196 family-adblock.bebasid.com
+103.87.68.196 internetsehat.bebasid.com
+103.87.68.196 antivirus.bebasid.com
+103.87.68.193 quic.dns.bebasid.com
+192.168.100.66 proxmox.bebasid.com
+172.67.193.192 ipochan.bebasid.com
+104.21.12.74 webmail.bebasid.com
+142.132.140.101 uptime.bebasid.com
+103.87.68.196 1984.bebasid.com
+161.129.154.115 mail.bebasid.com
+172.67.193.192 www.bebasid.com
+103.87.68.194 dns.bebasid.com
+104.21.12.74 cdn.bebasid.com
+104.21.12.74 bebasid.com
+
+# [hltv.org]
+104.18.41.212 atmosphere-secure.hltv.org
+172.64.146.44 fantasy-secure.hltv.org
+172.64.146.44 pronunciation.hltv.org
+13.49.106.76 staging.bcwp.hltv.org
+172.64.146.44 scorebot-lb.hltv.org
+104.18.41.212 r2-demos.hltv.org
+172.64.146.44 scripts.hltv.org
+172.64.146.44 img-cdn.hltv.org
+104.18.41.212 static.hltv.org
+172.64.146.44 ncuxt.hltv.org
+88.99.167.213 demos.hltv.org
+104.18.41.212 geo2.hltv.org
+13.49.106.76 bcwp.hltv.org
+23.227.38.32 shop.hltv.org
+188.40.59.77 dev2.hltv.org
+104.18.41.212 app.hltv.org
+172.64.146.44 www.hltv.org
+104.18.41.212 out.hltv.org
+78.46.34.93 bnc.hltv.org
+104.18.41.212 hltv.org
+
+# [mangadex.org]
+45.129.229.1 uploads.mangadex.org
+45.129.229.1 forums.mangadex.org
+65.8.161.46 status.mangadex.org
+45.129.229.1 auth.mangadex.org
+45.129.229.1 dxlb.mangadex.org
+45.129.229.1 www.mangadex.org
+45.129.229.2 api.mangadex.org
+45.129.229.14 ns2.mangadex.org
+45.129.229.13 ns1.mangadex.org
+45.129.229.2 mangadex.org
+
+# [rlsbb.ru]
+172.67.189.6 archive.rlsbb.ru
+104.21.43.240 comment.rlsbb.ru
+104.21.43.240 search.rlsbb.ru
+172.67.189.6 panel.rlsbb.ru
+172.67.189.6 old4.rlsbb.ru
+104.21.43.240 nfo1.rlsbb.ru
+172.67.189.6 old2.rlsbb.ru
+104.21.43.240 old3.rlsbb.ru
+104.21.43.240 log.rlsbb.ru
+172.67.189.6 img.rlsbb.ru
+104.21.43.240 www.rlsbb.ru
+172.67.189.6 old.rlsbb.ru
+104.21.43.240 rlsbb.ru
