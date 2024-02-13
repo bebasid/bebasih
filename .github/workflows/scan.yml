@@ -51,18 +51,20 @@ jobs:
       - name: Release hosts
         run: |
           mv hosts-subdomainlist_sorted hosts
-      - name: Add Template
+      - name: Add BEBASID Text to Hosts File
         run: |
-          sudo cat > hosts <<EOF
-      # BEBASID - Peduli Internet Netral
-      # Situs resmi kami: https://bebasid.com/
-      # Hosts ditulis oleh Komunitas Internet Netral Indonesia
-      # Dengan mengunduh BEBASID dan menggunakan aplikasi ini berarti menerima dan setuju untuk terikat dan mematuhi ketentuan yang berada di dalam halaman berikut: https://github.com/bebasid/bebasid/blob/master/dev/readme/RULES.md
+          sudo cat > temp_hosts <<EOF
+# BEBASID - Peduli Internet Netral
+# Situs resmi kami: https://bebasid.com/
+# Hosts ditulis oleh Komunitas Internet Netral Indonesia
+# Dengan mengunduh BEBASID dan menggunakan aplikasi ini berarti menerima dan setuju untuk terikat dan mematuhi ketentuan yang berada di dalam halaman berikut: https://github.com/bebasid/bebasid/blob/master/dev/readme/RULES.md
 
-      # [PEMBERITAHUAN SEBELUM MENGGUNAKAN HOSTS]
-      # Untuk Wi-Fi / Provider (ISP) yang memakai Inspeksi Paket Dalam (DPI), harap gunakan BebasIT / BebasID IT sebelum menggunakan hosts kami
-      $(cat hosts)
-      EOF
+# [PEMBERITAHUAN SEBELUM MENGGUNAKAN HOSTS]
+# Untuk Wi-Fi / Provider (ISP) yang memakai Inspeksi Paket Dalam (DPI), harap gunakan BebasIT / BebasID IT sebelum menggunakan hosts kami
+          EOF
+          sudo cat hosts >> temp_hosts
+          sudo mv temp_hosts hosts
+
       - name: Commit changes
         run: |
           git config --global user.email "gvoze32@yahoo.com"
