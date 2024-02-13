@@ -1,0 +1,62 @@
+name: bebasid Automator Request Issue Solver
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  add-comment:
+    if: github.event.label.name == 'request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Update Domainlist from Issue
+        id: update_domainlist
+        run: |
+          domain=$(jq -r '.issue.body' $GITHUB_EVENT_PATH | grep -oP '(?<=Domain: ).*')
+          echo $domain >> domainlist
+          echo "Domain $domain added to domainlist."
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl unzip wget jq
+          curl -LO https://github.com/findomain/findomain/releases/latest/download/findomain-linux.zip
+          unzip findomain-linux.zip
+          chmod +x findomain
+          sudo mv findomain /usr/bin/findomain
+          wget https://raw.githubusercontent.com/bebasid/bebasid/master/dev/scripts/scan.py
+          echo "INSTALLATION DONE - ALL SET"
+      - name: Run Findomain
+        run: |
+          domain=$(jq -r '.issue.body' $GITHUB_EVENT_PATH | grep -oP '(?<=Domain: ).*')
+          findomain -t $domain -u hasilunsorted
+      - name: Sort Subdomains
+        run: |
+          python - <<EOF
+          with open('hasilunsorted', 'r') as file:
+              lines = file.read().split('\n')
+          unique_lines = list(set(lines))
+          sorted_unique_lines = sorted(unique_lines, key=len)
+          sorted_unique_content = "\n".join(sorted_unique_lines)
+          with open('hasilsorted', 'w') as file:
+              file.write(sorted_unique_content)
+          EOF
+      - name: Run Scan
+        run: |
+          python scan.py hasilsorted
+          echo
+          echo "Result Lists:"
+          cat hosts-hasilsorted
+      - name: Release hosts
+        run: |
+          cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
+      - name: Commit changes
+        run: |
+          git config --global user.email "gvoze32@yahoo.com"
+          git config --global user.name "zksbot"
+          git add hosts domainlist
+          git commit -m "Update domainlist and hosts file"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.UPDATE_TOKEN }}
