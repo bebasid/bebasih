@@ -217,9 +217,11 @@ jobs:
         shell: bash
       - name: Commit and push changes
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git remote set-url origin "https://${{ secrets.GH_TOKEN }}@github.com/bebasid/bebasid-automator.git"
+          git config --global user.email "gvoze32@yahoo.com"
+          git config --global user.name "zksbot"
           git add hosts
-          git commit -m "Update hosts"
-          git push origin main
+          git commit -m "Compile hosts"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.UPDATE_TOKEN }}
