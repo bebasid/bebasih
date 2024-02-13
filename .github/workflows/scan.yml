@@ -1,17 +1,14 @@
 name: BEBASID AUTOMATOR DOMAIN SCANNER
-
 on:
   push:
     branches:
       - main
-
 jobs:
   scan_domains:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v1
       - name: Install Dependencies
         run: |
           sudo apt-get update
@@ -22,17 +19,14 @@ jobs:
           sudo mv findomain /usr/bin/findomain
           wget https://raw.githubusercontent.com/bebasid/bebasid/master/dev/scripts/scan.py
           echo "INSTALLATION DONE - ALL SET"
-
       - name: Run Findomain
         run: |
           findomain -f domainlist -r -u subdomainlist
-
       - name: Sort Subdomains
         run: |
           python - <<EOF
           with open("subdomainlist", "r") as file:
               lines = file.readlines()
-
           domain_dict = {}
           for line in lines:
               subdomain = line.strip()
@@ -40,18 +34,14 @@ jobs:
               if domain not in domain_dict:
                   domain_dict[domain] = []
               domain_dict[domain].append(subdomain)
-
           for domain in domain_dict:
               domain_dict[domain].sort(key=len)
-
           sorted_subdomains = []
           for domain in sorted(domain_dict.keys()):
               sorted_subdomains.extend(domain_dict[domain])
-
           with open("subdomainlist_sorted", "w") as file:
               file.write("\n".join(sorted_subdomains))
           EOF
-
       - name: Run Scan
         run: |
           python scan.py subdomainlist_sorted
@@ -61,6 +51,13 @@ jobs:
       - name: Release hosts
         run: |
           mv hosts-subdomainlist_sorted hosts
+      - name: Add template
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: hosts
+          contents: |
+            Hello World!
+          write-mode: append
       - name: Commit changes
         run: |
           git config --global user.email "gvoze32@yahoo.com"
