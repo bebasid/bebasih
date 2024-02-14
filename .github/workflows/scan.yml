@@ -26,7 +26,7 @@ jobs:
         run: |
           python - <<EOF
           with open("subdomainlist", "r") as file:
-              lines = [line.rstrip() for line in file.readlines()]
+              lines = file.readlines()
           domain_dict = {}
           for line in lines:
               subdomain = line.strip()
@@ -51,6 +51,7 @@ jobs:
       - name: Release hosts
         run: |
           mv hosts-subdomainlist_sorted hosts
+          sudo sed -i '1d' hosts
       - name: Add BEBASID Text to Hosts File
         run: |
           sudo cat > temp_hosts <<EOF
