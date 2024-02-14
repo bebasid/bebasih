@@ -1,0 +1,49 @@
+name: Filter Dead Domains
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+jobs:
+  filter_dead_domains:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Filter dead domains
+        run: |
+          python - <<EOF
+          with open('hosts', 'r') as file:
+              lines = file.readlines()
+          isi = []
+          for line in lines:
+              if line.startswith('# [') and line.endswith(']\n'):
+                  isi.append(line.strip('# []\n'))
+          with open('domainlistunfiltered', 'w') as output_file:
+              for domain in isi:
+                  output_file.write(domain + '\n')
+          with open('domainlistunfiltered', 'r') as file:
+              domainlist_unfiltered = file.readlines()
+          domainlist_unfiltered = [domain.strip() for domain in domainlist_unfiltered]
+          with open('domainlist', 'r') as file:
+              domainlist = file.readlines()
+          domainlist = [domain.strip() for domain in domainlist]
+          domain_set_unfiltered = set(domainlist_unfiltered)
+          domain_set = set(domainlist)
+          filtered_domains = domain_set_unfiltered.intersection(domain_set)
+          with open('domainlistfiltered', 'w') as output_file:
+              for domain in filtered_domains:
+                  output_file.write(domain + '\n')
+          EOF
+      - name: Move to domainlist
+        run: |
+          mv domainlistfiltered domainlist
+      - name: Commit changes
+        run: |
+          git config --global user.email "gvoze32@yahoo.com"
+          git config --global user.name "zksbot"
+          git add domainlist
+          git commit -m "Filter domainlist"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.UPDATE_TOKEN }}
