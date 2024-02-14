@@ -52,7 +52,7 @@ jobs:
         run: |
           mv hosts-subdomainlist_sorted hosts
           sudo sed -i '1d' hosts
-      - name: Add BEBASID Text to Hosts File
+      - name: Add Template
         run: |
           sudo cat > temp_hosts <<EOF
           # BEBASID - Peduli Internet Netral
