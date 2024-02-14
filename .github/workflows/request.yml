@@ -4,7 +4,7 @@ on:
     types:
       - labeled
 jobs:
-  add-comment:
+  scan_domains_request:
     if: github.event.label.name == 'request'
     runs-on: ubuntu-latest
     permissions:
@@ -14,7 +14,7 @@ jobs:
         uses: peter-evans/close-issue@v3
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain yang Anda akan segera ditambahkan.
+          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera ditambahkan.
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Update Domainlist from Issue
@@ -42,11 +42,10 @@ jobs:
           python - <<EOF
           with open('hasilunsorted', 'r') as file:
               lines = [line.rstrip() for line in file.readlines()]
-          unique_lines = list(set(lines))
-          sorted_unique_lines = sorted(unique_lines, key=len)
-          sorted_unique_content = "\n".join(sorted_unique_lines)
+          sorted_lines = sorted(lines, key=len)
+          sorted_content = "\n".join(sorted_lines)
           with open('hasilsorted', 'w') as file:
-              file.write(sorted_unique_content)
+              file.write(sorted_content)
           EOF
       - name: Run Scan
         run: |
