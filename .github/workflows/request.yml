@@ -11,10 +11,9 @@ jobs:
       issues: write
     steps:
       - name: Close Issue
-        uses: peter-evans/close-issue@v3
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera ditambahkan.
+        run: gh issue close --comment "Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera ditambahkan." ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ secrets.UPDATE_TOKEN }}
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Update Domainlist from Issue
