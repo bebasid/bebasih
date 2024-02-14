@@ -7,8 +7,6 @@ jobs:
   scan_domains_request:
     if: github.event.label.name == 'request'
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
