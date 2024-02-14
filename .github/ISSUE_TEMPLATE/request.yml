@@ -1,0 +1,52 @@
+name: Request New Domain
+description: New feature or new url unblock support/Fitur baru atau dukungan blokir dari situs url baru
+title: "[Add]: "
+assignees:
+  - gvoze32
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: Masukkan domain
+      placeholder: example.com
+    validations:
+      required: true
+  - type: textarea
+    id: alasan
+    attributes:
+      label: Alasan
+      description: Berikan Alasan
+      placeholder: meow
+      value: "meong"
+    validations:
+      required: true
+  - type: input
+    id: isp
+    attributes:
+      label: ISP Apa yang anda gunakan
+      placeholder: Telkom, Indihome, dll.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Sistem Operasi (OS)
+      description: Masukkan sistem operasi yang Anda gunakan.
+      placeholder: Windows 10, macOS, Debian Linux
+    validations:
+      required: true
+  - type: textarea
+    id: optional-comment
+    attributes:
+      label: Komentar
+      description: tambahan
+      placeholder: meo
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Kode Etik
+      description: Dengan mengirimkan isu ini, Anda setuju untuk mengikuti [Kode Etik](https://github.com/bebasid/bebasid/blob/master/dev/readme/RULES.md)
+      options:
+        - label: Saya menyetujui untuk mengikuti Kode Etik proyek ini
+          required: true
