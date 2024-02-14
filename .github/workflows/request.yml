@@ -7,6 +7,14 @@ jobs:
   add-comment:
     if: github.event.label.name == 'request'
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Close Issue
+        uses: peter-evans/close-issue@v3
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain yang Anda akan segera ditambahkan.
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -34,7 +42,7 @@ jobs:
         run: |
           python - <<EOF
           with open('hasilunsorted', 'r') as file:
-              lines = file.read().split('\n')
+              lines = [line.rstrip() for line in file.readlines()]
           unique_lines = list(set(lines))
           sorted_unique_lines = sorted(unique_lines, key=len)
           sorted_unique_content = "\n".join(sorted_unique_lines)
