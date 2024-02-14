@@ -15,7 +15,6 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain yang Anda akan segera ditambahkan.
-    steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Update Domainlist from Issue
