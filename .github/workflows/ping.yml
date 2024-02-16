@@ -22,13 +22,13 @@ jobs:
                   domains = f.readlines()
               with tqdm(total=len(domains), desc="Pinging Domains") as pbar:
                   for domain in domains:
-                      domain = domain.strip()  # Remove any leading/trailing whitespace
+                      domain = domain.strip()
                       try:
                           subprocess.check_output(["ping", "-c", "1", domain])
                           active_domains.append(domain)
                       except subprocess.CalledProcessError:
                           inactive_domains.append(domain)
-                      pbar.update(1)  # Update progress bar
+                      pbar.update(1)
               return active_domains, inactive_domains
           def export_to_file(filename, data):
               with open(filename, 'w') as f:
