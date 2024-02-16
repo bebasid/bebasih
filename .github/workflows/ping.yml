@@ -1,0 +1,59 @@
+name: Ping Domains
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+jobs:
+  ping_domains:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Ping domains
+        run: |
+          pip install tqdm
+          python - <<EOF
+          import subprocess
+          from tqdm import tqdm
+          def check_domain_activity(domain_list_file):
+              active_domains = []
+              inactive_domains = []
+              with open(domain_list_file, 'r') as f:
+                  domains = f.readlines()
+              with tqdm(total=len(domains), desc="Pinging Domains") as pbar:
+                  for domain in domains:
+                      domain = domain.strip()  # Remove any leading/trailing whitespace
+                      try:
+                          subprocess.check_output(["ping", "-c", "1", domain])
+                          active_domains.append(domain)
+                      except subprocess.CalledProcessError:
+                          inactive_domains.append(domain)
+                      pbar.update(1)  # Update progress bar
+              return active_domains, inactive_domains
+          def export_to_file(filename, data):
+              with open(filename, 'w') as f:
+                  for item in data:
+                      f.write("%s\n" % item)
+          if __name__ == "__main__":
+              domain_list_file = "domainlist"
+              active, inactive = check_domain_activity(domain_list_file)
+              print("\nActive Domains:")
+              print("\n".join(active))
+              print("\nInactive Domains:")
+              print("\n".join(inactive))
+              export_to_file("domainlive", active)
+              print("\nActive domains exported to domainlive")
+          EOF
+      - name: Move to domainlist
+        run: |
+          mv domainlive domainlist
+      - name: Commit changes
+        run: |
+          git config --global user.email "gvoze32@yahoo.com"
+          git config --global user.name "zksbot"
+          git add domainlist
+          git commit -m "Ping domainlist"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.UPDATE_TOKEN }}
