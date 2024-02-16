@@ -1,4 +1,4 @@
-name: bebasid Automator Request Issue Solver
+name: Request Issue Solver
 on:
   issues:
     types:
