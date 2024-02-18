@@ -1,8 +1,6 @@
 name: Filter Dead Domains
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * 0"
 jobs:
   filter_dead_domains:
     runs-on: ubuntu-latest

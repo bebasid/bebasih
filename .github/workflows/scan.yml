@@ -1,8 +1,6 @@
 name: Domain Scanner
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * 0"
 jobs:
   scan_domains:
     runs-on: ubuntu-latest
