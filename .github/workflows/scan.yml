@@ -40,15 +40,104 @@ jobs:
           with open("subdomainlist_sorted", "w") as file:
               file.write("\n".join(sorted_subdomains))
           EOF
+      - name: Separate Domains/Subdomains
+        run: |
+          python - <<EOF
+          with open("subdomainlist_sorted", "r") as file:
+              subdomains = file.read().splitlines()
+          single_dot_subdomains = []
+          multi_dot_subdomains = []
+          for subdomain in subdomains:
+              if subdomain.count(".") == 1:
+                  single_dot_subdomains.append(subdomain)
+              else:
+                  multi_dot_subdomains.append(subdomain)
+          with open("sdsubdomains", "w") as file:
+              file.write("\n".join(single_dot_subdomains))
+          with open("mdsubdomains", "w") as file:
+              file.write("\n".join(multi_dot_subdomains))
+          print("Subdomain dengan satu titik telah disimpan dalam file sdsubdomains")
+          print("Subdomain dengan lebih dari satu titik telah disimpan dalam file mdsubdomains")
+          EOF
+      - name: Remove Similar Domains/Subdomains
+        run: |
+          python - <<EOF
+          def remove_similar_single_dot(single_dot, multi_dot):
+              for multi in multi_dot[:]:
+                  for single in single_dot:
+                      if single in multi:
+                          multi_dot.remove(multi)
+                          break
+              return multi_dot
+          with open("sdsubdomains", "r") as file:
+              single_dot_subdomains = file.read().splitlines()
+          with open("mdsubdomains", "r") as file:
+              multi_dot_subdomains = file.read().splitlines()
+          updated_multi_dot_subdomains = remove_similar_single_dot(single_dot_subdomains, multi_dot_subdomains)
+          with open("updated_mdsubdomains", "w") as file:
+              file.write("\n".join(updated_multi_dot_subdomains))
+          print("Subdomain dengan satu titik yang mirip dengan subdomain dengan lebih dari satu titik telah dihapus.")
+          print("Hasil telah disimpan dalam file updated_mdsubdomains")
+          EOF
+      - name: Filter Subdomains
+        run: |
+          python - <<EOF
+          import re
+          with open("updated_mdsubdomains", "r") as file:
+              updated_multi_dot_subdomains = file.read().splitlines()
+          def extract_domain(subdomain):
+              match = re.search(r'\w+\.\w+$', subdomain)
+              if match:
+                  return match.group()
+              else:
+                  return subdomain
+          domains = [extract_domain(subdomain) for subdomain in updated_multi_dot_subdomains]
+          unique_domains = list(set(domains))
+          with open("usubdomains", "w") as file:
+              file.write("\n".join(unique_domains))
+          print("Domain telah diambil dari subdomain dan disimpan dalam file usubdomains.")
+          EOF
+      - name: Merge Subdomains
+        run: |
+          python - <<EOF
+          with open("usubdomains", "r") as file:
+              unique_domains = file.read().splitlines()
+          with open("subdomainlist_sorted", "r") as file:
+              subdomains = file.read().splitlines()
+          subdomains.extend(unique_domains)
+          with open("subdomainlist_sorted", "w") as file:
+              file.write("\n".join(subdomains))
+          print("Domain dari usubdomains telah ditambahkan ke file subdomainlist_sorted di bagian paling bawah.")
+          EOF
+      - name: Resort Subdomains
+        run: |
+          python - <<EOF
+          with open("subdomainlist_sorted", "r") as file:
+              lines = file.readlines()
+          domain_dict = {}
+          for line in lines:
+              subdomain = line.strip()
+              domain = subdomain.split(".")[-2] + "." + subdomain.split(".")[-1]
+              if domain not in domain_dict:
+                  domain_dict[domain] = []
+              domain_dict[domain].append(subdomain)
+          for domain in domain_dict:
+              domain_dict[domain].sort(key=len)
+          sorted_subdomains = []
+          for domain in sorted(domain_dict.keys()):
+              sorted_subdomains.extend(domain_dict[domain])
+          with open("subdomainlist_resorted", "w") as file:
+              file.write("\n".join(sorted_subdomains))
+          EOF
       - name: Run Scan
         run: |
-          python scan.py subdomainlist_sorted
+          python scan.py subdomainlist_resorted
           echo
           echo "Result Lists:"
-          cat hosts-subdomainlist_sorted
+          cat hosts-subdomainlist_resorted
       - name: Release hosts
         run: |
-          mv hosts-subdomainlist_sorted hosts
+          mv hosts-subdomainlist_resorted hosts
           sudo sed -i '1d' hosts
       - name: Add Template
         run: |
