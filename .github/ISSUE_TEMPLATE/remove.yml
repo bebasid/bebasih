@@ -1,5 +1,5 @@
-name: Request New Domain
-description: New feature or new url unblock support/Fitur baru atau dukungan blokir dari situs url baru
+name: Domain Removal Request
+description: Domain removal request from the list/Permintaan penghapusan domain dari daftar
 title: "[Add]: "
 assignees:
   - gvoze32
