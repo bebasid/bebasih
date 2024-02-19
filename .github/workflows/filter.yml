@@ -1,6 +1,8 @@
 name: Filter Dead Domains
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "30 5 * * 3"
 jobs:
   filter_dead_domains:
     runs-on: ubuntu-latest
@@ -40,7 +42,7 @@ jobs:
           git config --global user.email "gvoze32@yahoo.com"
           git config --global user.name "zksbot"
           git add domainlist
-          git commit -m "Filter domainlist"
+          git commit -m "Filter domainlist - $(date +'%d-%m-%Y')"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
