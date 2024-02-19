@@ -1,6 +1,6 @@
 name: Domain Removal Request
 description: Domain removal request from the list/Permintaan penghapusan domain dari daftar
-title: "[Add]: "
+title: "[Rem]: "
 assignees:
   - gvoze32
   - ryukora
