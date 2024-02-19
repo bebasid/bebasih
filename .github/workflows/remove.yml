@@ -14,7 +14,7 @@ jobs:
         uses: peter-evans/close-issue@v3
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Terima kasih atas kontribusi Anda, permintaan penghapusan domain Anda akan segera diterapkan.
+          comment: Terima kasih atas kontribusi Anda, permintaan penghapusan domain Anda akan diterapkan pada siklus update selanjutnya.
       - name: Remove Domain from Issue
         run: |
           domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p')
