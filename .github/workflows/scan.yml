@@ -300,7 +300,7 @@ jobs:
           git config --global user.email "gvoze32@yahoo.com"
           git config --global user.name "zksbot"
           git add hosts
-          git commit -m "Compile hosts - $(date +'%d-%m-%Y')"
+          git commit -m "Autocompile - $(date +'%d-%m-%Y')"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

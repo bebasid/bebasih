@@ -42,7 +42,7 @@ jobs:
           git config --global user.email "gvoze32@yahoo.com"
           git config --global user.name "zksbot"
           git add domainlist
-          git commit -m "Filter domainlist - $(date +'%d-%m-%Y')"
+          git commit -m "Filter dead domain list - $(date +'%d-%m-%Y')"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
