@@ -14,7 +14,7 @@ jobs:
         uses: peter-evans/close-issue@v3
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera ditambahkan.
+          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera diterapkan.
       - name: Update Domainlist from Issue
         run: |
           domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p')
