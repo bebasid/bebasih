@@ -26,7 +26,7 @@ jobs:
           git config --global user.name "zksbot"
           git add hosts domainlist
           domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p')
-          git commit -m "Add $domain to domainlist and hosts"
+          git commit -m "Remove $domain from domainlist"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
