@@ -44,6 +44,14 @@ body:
       description: tambahan
       placeholder: meo
   - type: checkboxes
+    id: validate
+    attributes:
+      label: Validasi
+      description: Dengan mengirimkan isu ini, Anda telah melihat dan memastikan bahwa domain yang Anda masukkan tidak ada di dalam daftar [domainlist](https://github.com/bebasid/bebasih/blob/main/domainlist).
+      options:
+        - label: Saya telah melihat dan memastikan bahwa domain yang saya masukkan tidak ada di dalam daftar domainlist
+          required: true
+  - type: checkboxes
     id: terms
     attributes:
       label: Kode Etik
