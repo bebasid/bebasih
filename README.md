@@ -14,7 +14,7 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/MIT-white?style=for-the-badge&logo=andela&logoColor=white&label=Lisensi&labelColor=222">
 </a>
 
-<img alt="Static Badge" src="https://img.shields.io/badge/2019-white?style=for-the-badge&logo=fireship&logoColor=white&label=Diluncurkan&labelColor=222">
+<img alt="Static Badge" src="https://img.shields.io/badge/2024-white?style=for-the-badge&logo=fireship&logoColor=white&label=Diluncurkan&labelColor=222">
 
 <br>
 
