@@ -21,7 +21,7 @@ jobs:
           echo "INSTALLATION DONE - ALL SET"
       - name: Run Findomain
         run: |
-          findomain -f domainlist -r -u subdomainlist
+          findomain -f domainlist -r -u subdomainlist --rate-limit 1 --lightweight-threads 1000 --tcp-connect-threads 1000 --exclude-sources crtsh --no-wildcards
       - name: Sort Subdomains
         run: |
           python - <<EOF
