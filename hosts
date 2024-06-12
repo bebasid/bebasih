@@ -209,11 +209,6 @@
 172.67.212.46 www.aesport.tv
 172.64.80.1 aesport.tv
 
-# [sportshd.sx]
-109.205.187.139 www.sportshd.sx
-104.21.1.86 cfr.sportshd.sx
-109.205.187.139 sportshd.sx
-
 # [streamed.su]
 104.21.12.61 streamed.su
 
@@ -6511,7 +6506,6 @@
 51.79.77.158 derpixon.newgrounds.com
 51.79.82.168 newgrounds.com
 144.217.190.195 ngmail.newgrounds.com
-
 
 # [mofos.com]
 66.254.114.234 mofos.com
@@ -24021,3 +24015,8 @@
 
 # [streamed.su]
 104.21.12.61 streamed.su
+
+# [sportshd.sx]
+109.205.187.139 www.sportshd.sx
+172.67.128.240 cfr.sportshd.sx
+109.205.187.139 sportshd.sx
