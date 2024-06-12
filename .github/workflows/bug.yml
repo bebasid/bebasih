@@ -61,12 +61,14 @@ jobs:
       - name: Update Hosts File
         run: |
           domain=${{ steps.get-domain.outputs.domain }}
-          # Remove old entries
+          # Create a backup of the original hosts file
+          cp hosts hosts.bak
+          # Remove old entries related to the domain
           awk -v domain="[$domain]" '
           BEGIN {print_block=1}
-          $0 ~ domain {print_block=0}
-          $0 ~ /^\[/ && $0 !~ domain {print_block=1}
-          print_block' hosts > hosts.tmp
+          $0 == domain {print_block=0}
+          $0 ~ /^\[/ && $0 != domain {print_block=1}
+          print_block {print}' hosts > hosts.tmp
           mv hosts.tmp hosts
           # Add new entries
           echo "[$domain]" >> hosts
