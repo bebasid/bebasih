@@ -56,7 +56,7 @@ jobs:
           cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
       - name: Remove Adjacent Empty Lines
         run: |
-          awk '!/^$/ || x {print} {x=1}' hosts > hosts.tmp
+          awk '/(\.+$)/' hosts > hosts.tmp
           mv hosts.tmp hosts
       - name: Commit changes
         run: |
