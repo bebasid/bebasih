@@ -54,6 +54,10 @@ jobs:
       - name: Release hosts
         run: |
           cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
       - name: Remove Adjacent Empty Lines
         run: |
           import re
