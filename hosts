@@ -228,9 +228,6 @@
 104.20.223.111 4tube.com
 
 # [60fps.live]
-199.59.243.225 cdn1.60fps.live
-199.59.243.225 cdn.60fps.live
-199.59.243.225 60fps.live
 
 # [60fps.xyz]
 104.21.92.8 60fps.xyz
@@ -49363,18 +49360,6 @@
 [60fps.live]
 
 # [60fps.live]
-199.59.243.226 hostmaster.60fps.live
-199.59.243.226 www.cdn1.60fps.live
-199.59.243.226 www.cdn.60fps.live
-199.59.243.226 mta-sts.60fps.live
-199.59.243.226 youpit.60fps.live
-199.59.243.226 hcdn.60fps.live
-199.59.243.226 cdn1.60fps.live
-199.59.243.226 www.60fps.live
-199.59.243.226 dev.60fps.live
-199.59.243.226 cdn.60fps.live
-199.59.243.226 ws.60fps.live
-199.59.243.226 60fps.live
 
 # [binance.com]
 54.92.74.127 a5d29bcc3e2e1a2d37696fb067e8d0e49.profile.waw50.dev.api.binance.com
@@ -66308,3 +66293,18 @@
 # [olympicstreams.me]
 45.178.7.139 www.olympicstreams.me
 45.178.7.139 olympicstreams.me
+
+
+# [60fps.live]
+199.59.243.226 hostmaster.60fps.live
+199.59.243.226 www.cdn1.60fps.live
+199.59.243.226 www.cdn.60fps.live
+199.59.243.226 mta-sts.60fps.live
+199.59.243.226 youpit.60fps.live
+199.59.243.226 hcdn.60fps.live
+199.59.243.226 cdn1.60fps.live
+199.59.243.226 www.60fps.live
+199.59.243.226 dev.60fps.live
+199.59.243.226 cdn.60fps.live
+199.59.243.226 ws.60fps.live
+199.59.243.226 60fps.live
