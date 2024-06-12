@@ -39,6 +39,11 @@ jobs:
           with open('hasilsorted', 'w') as file:
               file.write(sorted_content)
           EOF
+      - name: Extract Domain to Fix
+        run: |
+          domain_to_fix=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p' | tr -d '[:space:]')
+          echo "::set-output name=domain_to_fix::$domain_to_fix"
+          id: extract_domain
       - name: Run Scan
         run: |
           domain_to_fix="${{ steps.extract_domain.outputs.domain_to_fix }}"
