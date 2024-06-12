@@ -15,11 +15,6 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera diterapkan.
-      - name: Update Domainlist from Issue
-        run: |
-          domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p' | tr -d '[:space:]')
-          echo -e "$domain" >> dev/domainlist
-          echo "Domain $domain added to domainlist."
       - name: Install Dependencies
         run: |
           sudo apt-get update
