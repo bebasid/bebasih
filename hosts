@@ -198,17 +198,6 @@
 104.21.235.84 www.1stream.eu
 104.21.235.83 1stream.eu
 
-# [aesport.tv]
-45.11.56.8 primarysrv.aesport.tv
-38.104.169.186 download.aesport.tv
-172.67.212.46 dev-db.aesport.tv
-104.21.67.44 image.aesport.tv
-104.21.67.44 demo.aesport.tv
-172.67.212.46 dev.aesport.tv
-172.67.212.46 cms.aesport.tv
-172.67.212.46 www.aesport.tv
-172.64.80.1 aesport.tv
-
 # [footybite.cc]
 104.21.61.207 www1.footybite.cc
 104.21.61.207 www.footybite.cc
@@ -24017,3 +24006,15 @@
 
 # [streamed.su]
 172.64.80.1 streamed.su
+
+# [aesport.tv]
+45.11.56.8 primarysrv.aesport.tv
+37.19.207.34 download.aesport.tv
+104.21.67.44 image2.aesport.tv
+172.67.212.46 dev-db.aesport.tv
+172.67.212.46 image.aesport.tv
+104.21.67.44 demo.aesport.tv
+172.67.212.46 dev.aesport.tv
+104.21.67.44 cms.aesport.tv
+172.67.212.46 www.aesport.tv
+104.21.67.44 aesport.tv
