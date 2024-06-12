@@ -49,11 +49,12 @@ jobs:
         run: |
           python3 - <<EOF
           import re
-
+          import os
+          
           def replace_hosts(file_path, target):
               with open(file_path, 'r') as file:
                   hosts = file.read()
-
+          
               lines = hosts.split('\n')
               new_lines = []
               inside_target = False
@@ -66,15 +67,16 @@ jobs:
                       new_lines.append(line)
                   elif not inside_target:
                       new_lines.append(line)
-
+          
               new_hosts = '\n'.join(new_lines)
               with open(file_path, 'w') as file:
                   file.write(new_hosts)
-
+          
           file_path = 'hosts'
-          target = $(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p')
+          target = os.popen("jq -r '.issue.body' '$GITHUB_EVENT_PATH' | sed -n '3p'").read().strip()
           replace_hosts(file_path, target)
           EOF
+          shell: /usr/bin/bash -e {0}
       - name: Release hosts
         run: |
           cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
