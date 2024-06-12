@@ -49396,3 +49396,19 @@
 # [buffstreams.app]
 172.67.187.75 www.buffstreams.app
 104.21.80.222 buffstreams.app
+[60fps.live]
+
+
+# [60fps.live]
+199.59.243.226 hostmaster.60fps.live
+199.59.243.226 www.cdn1.60fps.live
+199.59.243.226 www.cdn.60fps.live
+199.59.243.226 mta-sts.60fps.live
+199.59.243.226 youpit.60fps.live
+199.59.243.226 hcdn.60fps.live
+199.59.243.226 cdn1.60fps.live
+199.59.243.226 dev.60fps.live
+199.59.243.226 cdn.60fps.live
+199.59.243.226 www.60fps.live
+199.59.243.226 ws.60fps.live
+199.59.243.226 60fps.live
