@@ -56,8 +56,16 @@ jobs:
           cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
       - name: Remove Adjacent Empty Lines
         run: |
-          awk '/(\.+$)/' hosts > hosts.tmp
-          mv hosts.tmp hosts
+          remove_adjacent_empty_lines() {
+              local file_path="$1"
+              local temp_file=$(mktemp)
+
+              awk 'NF || !p {print} {p = !NF}' "$file_path" > "$temp_file"
+              mv "$temp_file" "$file_path"
+          }
+
+          file_path='hosts'
+          remove_adjacent_empty_lines "$file_path"
       - name: Commit changes
         run: |
           git config --global user.email "gvoze32@yahoo.com"
