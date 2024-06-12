@@ -1,22 +1,22 @@
-name: Request Issue Solver
+name: Bug Issue Solver
 on:
   issues:
     types:
       - labeled
 
 jobs:
-  scan_domains_request:
+  fix_issue_request:
     if: github.event.label.name == 'bug-solve'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Close Issue
         uses: peter-evans/close-issue@v3
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Terima kasih atas kontribusi Anda, permintaan penambahan domain Anda akan segera diterapkan.
+          comment: Terima kasih atas kontribusi Anda, perbaikan domain Anda akan segera diterapkan.
 
       - name: Install Dependencies
         run: |
@@ -29,75 +29,56 @@ jobs:
           wget https://raw.githubusercontent.com/bebasid/bebasid/master/dev/scripts/scan.py
           echo "INSTALLATION DONE - ALL SET"
 
+      - name: Fetch Domain from Issue
+        id: get-domain
+        run: |
+          domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p')
+          echo "::set-output name=domain::$domain"
+
       - name: Run Findomain
         run: |
-          domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p' | tr -d '[:space:]')
-          findomain -t "$domain" -u hasilunsorted
+          domain=${{ steps.get-domain.outputs.domain }}
+          findomain -t $domain -u hasilunsorted
 
       - name: Sort Subdomains
         run: |
-          python3 - <<EOF
+          python - <<EOF
           with open('hasilunsorted', 'r') as file:
-              lines = sorted(file.readlines(), key=len)
+              lines = [line.rstrip() for line in file.readlines()]
+          sorted_lines = sorted(lines, key=len)
+          sorted_content = "\n".join(sorted_lines)
           with open('hasilsorted', 'w') as file:
-              file.writelines(lines)
+              file.write(sorted_content)
           EOF
 
-      - name: Extract Domain to Fix
-        id: extract_domain
+      - name: Run Scan
         run: |
-          domain_to_fix=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p' | tr -d '[:space:]')
-          echo "::set-output name=domain_to_fix::$domain_to_fix"
+          python scan.py hasilsorted
+          echo
+          echo "Result Lists:"
+          cat hosts-hasilsorted
 
       - name: Update Hosts File
         run: |
-          domain_to_fix="${{ steps.extract_domain.outputs.domain_to_fix }}"
-          python3 - <<EOF
-          import re
-      
-          domain = "$domain_to_fix"
-          start_pattern = fr"^\[{domain}\]$"
-          end_pattern = r"^\[.*?\]$"
-      
-          with open("hosts", "r") as file:
-              lines = file.readlines()
-      
-          start_index = None
-          end_index = None
-      
-          for i, line in enumerate(lines):
-              if re.match(start_pattern, line):
-                  start_index = i
-              elif start_index is not None and re.match(end_pattern, line):
-                  end_index = i
-                  break
-      
-          if start_index is not None:
-              if end_index is None:
-                  end_index = len(lines)
-              new_lines = lines[:start_index + 1] + open("hasilsorted", "r").readlines() + lines[end_index:]
-              with open("hosts", "w") as file:
-                  file.writelines(new_lines)
-      
-          print("Result Lists:")
-          with open("hosts", "r") as file:
-              print(file.read())
-          EOF
-
-      - name: Clean up temporary files
-        run: |
-          rm findomain-linux.zip hasilunsorted hasilsorted scan.py
+          domain=${{ steps.get-domain.outputs.domain }}
+          # Remove old entries
+          awk -v domain="[$domain]" '
+          BEGIN {print_block=1}
+          $0 ~ domain {print_block=0}
+          $0 ~ /^\[/ && $0 !~ domain {print_block=1}
+          print_block' hosts > hosts.tmp
+          mv hosts.tmp hosts
+          # Add new entries
+          echo "[$domain]" >> hosts
+          cat hosts-hasilsorted >> hosts
 
       - name: Commit changes
-        env:
-          issue_number: ${{ github.event.issue.number }}
-          issue_user: ${{ github.event.issue.user.login }}
         run: |
           git config --global user.email "gvoze32@yahoo.com"
           git config --global user.name "zksbot"
           git add hosts
-          domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p' | tr -d '[:space:]')
-          git commit -m "Fix $domain in hosts (Issue #$issue_number requested by @$issue_user)"
+          domain=${{ steps.get-domain.outputs.domain }}
+          git commit -m "Fix $domain in hosts file"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
