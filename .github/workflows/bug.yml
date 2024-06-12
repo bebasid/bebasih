@@ -84,6 +84,10 @@ jobs:
               print(file.read())
           EOF
 
+      - name: Clean up temporary files
+        run: |
+          rm findomain-linux.zip hasilunsorted hasilsorted scan.py
+
       - name: Commit changes
         env:
           issue_number: ${{ github.event.issue.number }}
