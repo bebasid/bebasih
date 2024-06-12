@@ -76,7 +76,6 @@ jobs:
           target = os.popen("jq -r '.issue.body' '$GITHUB_EVENT_PATH' | sed -n '3p'").read().strip()
           replace_hosts(file_path, target)
           EOF
-          shell: /usr/bin/bash -e {0}
       - name: Release hosts
         run: |
           cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
