@@ -198,16 +198,6 @@
 104.21.235.84 www.1stream.eu
 104.21.235.83 1stream.eu
 
-# [aesport.tv]
-45.11.56.8 primarysrv.aesport.tv
-38.104.169.186 download.aesport.tv
-172.67.212.46 dev-db.aesport.tv
-104.21.67.44 image.aesport.tv
-104.21.67.44 demo.aesport.tv
-172.67.212.46 dev.aesport.tv
-172.67.212.46 cms.aesport.tv
-172.67.212.46 www.aesport.tv
-172.64.80.1 aesport.tv
 
 # [streamed.su]
 104.21.12.61 streamed.su
@@ -24020,3 +24010,14 @@
 104.21.1.86 cfr.sportshd.sx
 109.205.187.139 www.sportshd.sx
 109.205.187.139 sportshd.sx
+
+# [aesport.tv]
+45.11.56.8 primarysrv.aesport.tv
+37.19.207.34 download.aesport.tv
+104.21.67.44 dev-db.aesport.tv
+172.67.212.46 image.aesport.tv
+172.67.212.46 demo.aesport.tv
+104.21.67.44 cms.aesport.tv
+172.67.212.46 dev.aesport.tv
+172.67.212.46 www.aesport.tv
+104.21.67.44 aesport.tv
