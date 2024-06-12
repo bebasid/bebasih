@@ -54,12 +54,9 @@ jobs:
       - name: Release hosts
         run: |
           cat hosts-hasilsorted | sudo tee -a hosts > /dev/null
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
       - name: Remove Adjacent Empty Lines
         run: |
+          python - <<EOF
           import re
           
           def remove_adjacent_empty_lines(file_path):
@@ -85,6 +82,7 @@ jobs:
   
           file_path = 'hosts'
           remove_adjacent_empty_lines(file_path)
+          EOF
       - name: Commit changes
         run: |
           git config --global user.email "gvoze32@yahoo.com"
