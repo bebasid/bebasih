@@ -43,7 +43,6 @@ jobs:
         run: |
           domain_to_fix=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p' | tr -d '[:space:]')
           echo "::set-output name=domain_to_fix::$domain_to_fix"
-          id: extract_domain
       - name: Run Scan
         run: |
           domain_to_fix="${{ steps.extract_domain.outputs.domain_to_fix }}"
