@@ -19,7 +19,6 @@ jobs:
         run: |
           domain=$(jq -r '.issue.body' "$GITHUB_EVENT_PATH" | sed -n '3p')
           sed "/$domain/d" hosts > hosts.tmp
-          grep -v "${domain}$" hosts > hosts.tmp
           rm hosts
           mv hosts.tmp hosts
       - name: Install Dependencies
